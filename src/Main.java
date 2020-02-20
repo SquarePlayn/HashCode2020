@@ -24,8 +24,8 @@ public class Main {
 
     public Solution solve(Problem problem) {
         Solution solution;
-        solution = random(problem);
-//        solution = sortLibsOnStartTime(problem);
+//        solution = random(problem);
+        solution = sortLibsOnStartTime(problem);
 
         return solution;
     }
@@ -38,9 +38,10 @@ public class Main {
         solution.addAllLibraries();
         solution.addAllBooks();
 
-//        solution.sortBooksOnScoreDumb();
+        solution.sortLibrariesOnTime();
+        solution.sortBooksOnScoreDumb();
 //        solution.sortOnBooksLeft();
-        solution.sortLibrariesOnScoreLeft();
+//        solution.sortLibrariesOnScoreLeft();
 
         return solution;
     }
