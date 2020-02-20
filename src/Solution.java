@@ -69,6 +69,10 @@ public class Solution {
         for (Library library : libraries) {
             day += library.signupTime;
 
+            if (day >= problem.numDays) {
+                break;
+            }
+
             library.booksOrder.sort((o1, o2) -> {
                 if (booksScanned.contains(o1) == booksScanned.contains(o2)) {
                     return o2.value - o1.value;
@@ -128,6 +132,9 @@ public class Solution {
             librariesSeen.add(library);
 
             day += library.signupTime;
+            if (day >= problem.numDays) {
+                break;
+            }
             for (int i = 0; i < library.canStillScan(day, problem.numDays); i++) {
                 booksScanned.add(library.booksOrder.get(i));
             }

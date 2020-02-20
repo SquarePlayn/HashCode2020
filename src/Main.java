@@ -24,8 +24,8 @@ public class Main {
 
     public Solution solve(Problem problem) {
         Solution solution;
-//        solution = random(problem);
-        solution = sortLibsOnStartTime(problem);
+        solution = random(problem);
+//        solution = sortLibsOnStartTime(problem);
 
         return solution;
     }
@@ -61,9 +61,29 @@ public class Main {
                 Collections.shuffle(library.booksOrder);
             }
             Collections.shuffle(solution.libraries);
-            if (solution.getScore() > bestScore) {
-                bestScore = solution.getScore();
+            long score = solution.getScore();
+            if (score > bestScore) {
+                bestScore = score;
                 bestSolution = solution.clone();
+                System.out.println("Improved to " + bestScore);
+                solution.toFile();
+
+                solution.sortOnBooksLeft();
+                score = solution.getScore();
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestSolution = solution.clone();
+                    System.out.println("Improved with sortOnBooksLeft to " + bestScore);
+                    solution.toFile();
+                }
+            }
+            if (score * 1.0005 > bestScore && false) {
+                if (solution.getScore() > bestScore) {
+                    bestScore = solution.getScore();
+                    bestSolution = solution.clone();
+                    System.out.println("Improved with sortOnBooksLeft to " + bestScore);
+                    solution.toFile();
+                }
             }
         }
 

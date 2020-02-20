@@ -27,6 +27,8 @@ public class Library {
     }
 
     public int canStillScan(int day, int numDays) {
-        return Math.min(booksOrder.size(), (numDays - day) * booksPerDay);
+        long booksToScan = (numDays - day) * (long) booksPerDay;
+        long val = Math.min(booksOrder.size(), booksToScan);
+        return (int) val;
     }
 }
