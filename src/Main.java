@@ -16,8 +16,8 @@ public class Main {
 //    private static final Problem pr = new Problem("b_read_on.txt");
 //    private static final Problem pr = new Problem("c_incunabula.txt");
 //    private static final Problem pr = new Problem("d_tough_choices.txt");
-//    private static final Problem pr = new Problem("e_so_many_books.txt");
-    private static final Problem pr = new Problem("f_libraries_of_the_world.txt");
+    private static final Problem pr = new Problem("e_so_many_books.txt");
+//    private static final Problem pr = new Problem("f_libraries_of_the_world.txt");
 
 
     public void run() {
@@ -37,7 +37,8 @@ public class Main {
         solution.addAllBooks();
 
         solution.libraries.sort(Comparator.comparingInt(o -> o.signupTime));
-        solution.sortBooksOnScoreDumb();
+//        solution.sortBooksOnScoreDumb();
+        solution.sortOnBooksLeft();
 
         return solution;
     }

@@ -25,4 +25,8 @@ public class Library {
         library.booksOrder.addAll(booksOrder);
         return library;
     }
+
+    public int canStillScan(int day, int numDays) {
+        return Math.min(booksOrder.size(), (numDays - day) * booksPerDay);
+    }
 }

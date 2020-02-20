@@ -31,22 +31,29 @@ public class Solution {
         }
     }
 
+    public void sortOnBooksLeft() {
+        Set<Book> booksScanned = new HashSet<>();
+        int day = 0;
+        for (Library library : libraries) {
+            day += library.signupTime;
 
+            library.booksOrder.sort((o1, o2) -> {
+                if (booksScanned.contains(o1) == booksScanned.contains(o2)) {
+                    return  o2.value - o1.value;
+                } else {
+                    if (booksScanned.contains(o1)) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                }
+            });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            for (int i = 0; i < library.canStillScan(day, problem.numDays); i++) {
+                booksScanned.add(library.booksOrder.get(i));
+            }
+        }
+    }
 
 
     // ===== Other functionality =====
@@ -79,8 +86,7 @@ public class Solution {
             librariesSeen.add(library);
 
             day += library.signupTime;
-            int canScan = (problem.numDays - day) * library.booksPerDay;
-            for (int i = 0; i < Math.min(library.booksOrder.size(), canScan); i ++) {
+            for (int i = 0; i < library.canStillScan(day, problem.numDays); i++) {
                 booksScanned.add(library.booksOrder.get(i));
             }
         }
@@ -98,7 +104,7 @@ public class Solution {
     public void toFile() {
         try {
 
-            BufferedWriter writer = new BufferedWriter(new FileWriter("solution/"+problem.name));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("solution/" + problem.name));
             writer.write(libraries.size() + NL);
             for (Library library : libraries) {
                 writer.write(library.id + SEP + library.booksOrder.size() + NL);
