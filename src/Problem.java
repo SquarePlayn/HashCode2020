@@ -5,13 +5,15 @@ import java.util.Scanner;
 
 public class Problem {
 
+    final String name;
     final int numBooks;
     final int numLibs;
     final int numDays;
     final ArrayList<Library> libraries;
     final ArrayList<Book> books;
 
-    public Problem(int numBooks, int numLibs, int numDays, ArrayList<Library> libraries, ArrayList<Book> books) {
+    public Problem(String name, int numBooks, int numLibs, int numDays, ArrayList<Library> libraries, ArrayList<Book> books) {
+        this.name = name;
         this.numBooks = numBooks;
         this.numLibs = numLibs;
         this.numDays = numDays;
@@ -20,6 +22,8 @@ public class Problem {
     }
 
     public Problem(String name) {
+        this.name = name;
+
         Scanner sc = null;
         try {
             sc = new Scanner(new File("data/" + name));

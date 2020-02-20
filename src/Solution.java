@@ -1,9 +1,15 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class Solution {
+
+    static final String NL = "\n";
+    static final String SEP = " ";
 
     List<Library> libraries = new ArrayList<>();
 
@@ -30,7 +36,13 @@ public class Solution {
     public long calcScore() {
         int day = 0;
         Set<Book> booksScanned = new HashSet<>();
+        Set<Library> librariesSeen = new HashSet<>();
         for (Library library : libraries) {
+            if (librariesSeen.contains(library)) {
+                throw new IllegalStateException("Library exists multiple times in solution.");
+            }
+            librariesSeen.add(library);
+
             day += library.signupTime;
             int canScan = (problem.numDays - day) * library.booksPerDay;
             for (int i = 0; i < Math.min(library.booksOrder.size(), canScan); i ++) {
@@ -49,5 +61,25 @@ public class Solution {
             score = calcScore();
         }
         return score;
+    }
+
+    public void toFile() {
+        try {
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter("solution/"+problem.name));
+            writer.write(libraries.size() + NL);
+            for (Library library : libraries) {
+                writer.write(library.id + SEP + library.booksOrder.size() + NL);
+                for (Book book : library.booksOrder) {
+                    writer.write(book.id + SEP);
+                }
+                writer.write(NL);
+            }
+
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
     }
 }

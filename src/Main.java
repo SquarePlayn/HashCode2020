@@ -22,6 +22,7 @@ public class Main {
     public void run() {
         Solution solution = random(pr);
         System.out.println(solution.calcScore());
+        solution.toFile();
     }
 
     public Solution random(Problem problem) {
