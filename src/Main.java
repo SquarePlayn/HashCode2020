@@ -1,28 +1,44 @@
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class Main {
 
 //    private static final Problem prA = new Problem("a_example.txt");
-    private static final Problem prB = new Problem("b_read_on.txt");
-    private static final Problem prC = new Problem("c_incunabula.txt");
-    private static final Problem prD = new Problem("d_tough_choices.txt");
-    private static final Problem prE = new Problem("e_so_many_books.txt");
-    private static final Problem prF = new Problem("f_libraries_of_the_world.txt");
+//    private static final Problem prB = new Problem("b_read_on.txt");
+//    private static final Problem prC = new Problem("c_incunabula.txt");
+//    private static final Problem prD = new Problem("d_tough_choices.txt");
+//    private static final Problem prE = new Problem("e_so_many_books.txt");
+//    private static final Problem prF = new Problem("f_libraries_of_the_world.txt");
 
 //    private static final Problem pr = new Problem("a_example.txt");
-//    private static final Problem pr = new Problem("b_read_on.txt");
+    private static final Problem pr = new Problem("b_read_on.txt");
 //    private static final Problem pr = new Problem("c_incunabula.txt");
 //    private static final Problem pr = new Problem("d_tough_choices.txt");
 //    private static final Problem pr = new Problem("e_so_many_books.txt");
-    private static final Problem pr = new Problem("f_libraries_of_the_world.txt");
+//    private static final Problem pr = new Problem("f_libraries_of_the_world.txt");
 
 
     public void run() {
-        Solution solution = random(pr);
-        System.out.println(solution.getScore());
+        Solution solution;
+        solution = sortLibsOnStartTime(pr);
+//        solution = random(pr);
+        System.out.println("Score: " + solution.getScore());
         solution.toFile();
+    }
+
+    // TODO Set best book order when library order is known
+
+    public Solution sortLibsOnStartTime(Problem problem) {
+        Solution solution = new Solution(problem);
+
+        solution.addAllLibraries();
+        solution.addAllBooks();
+
+        solution.libraries.sort(Comparator.comparingInt(o -> o.signupTime));
+
+        return solution;
     }
 
     public Solution random(Problem problem) {

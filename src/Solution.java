@@ -1,10 +1,7 @@
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Solution {
 
@@ -14,7 +11,45 @@ public class Solution {
     List<Library> libraries = new ArrayList<>();
 
     private final Problem problem;
-    private long score = -1;
+//    private long score = -1;
+
+    // ===== Algorithm methods with logic =====
+
+    public void addAllLibraries() {
+        libraries = new ArrayList<>(problem.libraries);
+    }
+
+    public void addAllBooks() {
+        for (Library library : libraries) {
+            library.booksOrder = new ArrayList<>(library.books);
+        }
+    }
+
+    public void sortBooksOnScoreDumb() {
+        for (Library library : libraries) {
+            library.booksOrder.sort((o1, o2) -> o2.value - o1.value);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // ===== Other functionality =====
 
     public Solution(Problem problem) {
         this.problem = problem;
@@ -57,10 +92,7 @@ public class Solution {
     }
 
     public long getScore() {
-        if (score == -1) {
-            score = calcScore();
-        }
-        return score;
+        return calcScore();
     }
 
     public void toFile() {
