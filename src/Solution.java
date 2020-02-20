@@ -15,19 +15,51 @@ public class Solution {
 
     // ===== Algorithm methods with logic =====
 
-    public void addAllLibraries() {
-        libraries = new ArrayList<>(problem.libraries);
+    // == Sort libraries
+
+    public void sortLibrariesOnTime() {
+        libraries.sort(Comparator.comparingInt(o -> o.signupTime));
     }
 
-    public void addAllBooks() {
-        for (Library library : libraries) {
-            library.booksOrder = new ArrayList<>(library.books);
+    public void sortLibrariesOnScoreLeft() {
+        addAllBooks();
+        libraries = new ArrayList<>();
+
+        Set<Library> libsLeft = new HashSet<>(problem.libraries);
+        Set<Book> justAdded = new HashSet<>();
+        int day = 0;
+        libsLeft.forEach(l -> l.booksOrder.sort(Comparator.comparingInt(o -> -o.value)));
+
+        while (!libsLeft.isEmpty() && day < problem.numDays) {
+            Library bestLibrary = null;
+            int bestScore = -1;
+
+            for (Library library : libsLeft) {
+                library.booksOrder.removeAll(justAdded);
+                int score = 0;
+                Set<Book> booksAdd = new HashSet<>();
+                for (int i = 0; i < library.canStillScan(day, problem.numDays); i++) {
+                    score += library.booksOrder.get(i).value;
+                    booksAdd.add(library.booksOrder.get(i));
+                }
+                if (score > bestScore) {
+                    bestLibrary = library;
+                    bestScore = score;
+                    justAdded = booksAdd;
+                }
+            }
+
+            libsLeft.remove(bestLibrary);
+            libraries.add(bestLibrary);
+            day += bestLibrary.signupTime;
         }
     }
 
+    // == Sort books
+
     public void sortBooksOnScoreDumb() {
         for (Library library : libraries) {
-            library.booksOrder.sort((o1, o2) -> o2.value - o1.value);
+            library.booksOrder.sort(Comparator.comparingInt(o -> -o.value));
         }
     }
 
@@ -39,7 +71,7 @@ public class Solution {
 
             library.booksOrder.sort((o1, o2) -> {
                 if (booksScanned.contains(o1) == booksScanned.contains(o2)) {
-                    return  o2.value - o1.value;
+                    return o2.value - o1.value;
                 } else {
                     if (booksScanned.contains(o1)) {
                         return 1;
@@ -57,6 +89,16 @@ public class Solution {
 
 
     // ===== Other functionality =====
+
+    public void addAllLibraries() {
+        libraries = new ArrayList<>(problem.libraries);
+    }
+
+    public void addAllBooks() {
+        for (Library library : libraries) {
+            library.booksOrder = new ArrayList<>(library.books);
+        }
+    }
 
     public Solution(Problem problem) {
         this.problem = problem;
