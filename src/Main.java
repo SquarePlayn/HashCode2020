@@ -39,8 +39,8 @@ public class Main {
         solution.addAllBooks();
 
         solution.sortLibrariesOnTime();
-        solution.sortBooksOnScoreDumb();
-//        solution.sortOnBooksLeft();
+//        solution.sortBooksOnScoreDumb();
+        solution.sortOnBooksLeft();
 //        solution.sortLibrariesOnScoreLeft();
 
         return solution;
