@@ -5,11 +5,11 @@ import java.util.Collections;
 public class Main {
 
 //    private static final Problem prA = new Problem("a_example.txt");
-//    private static final Problem prB = new Problem("b_read_on.txt");
-//    private static final Problem prC = new Problem("c_incunabula.txt");
-//    private static final Problem prD = new Problem("d_tough_choices.txt");
-//    private static final Problem prE = new Problem("e_so_many_books.txt");
-//    private static final Problem prF = new Problem("f_libraries_of_the_world.txt");
+    private static final Problem prB = new Problem("b_read_on.txt");
+    private static final Problem prC = new Problem("c_incunabula.txt");
+    private static final Problem prD = new Problem("d_tough_choices.txt");
+    private static final Problem prE = new Problem("e_so_many_books.txt");
+    private static final Problem prF = new Problem("f_libraries_of_the_world.txt");
 
 //    private static final Problem pr = new Problem("a_example.txt");
 //    private static final Problem pr = new Problem("b_read_on.txt");
@@ -21,7 +21,7 @@ public class Main {
 
     public void run() {
         Solution solution = random(pr);
-        System.out.println(solution.calcScore());
+        System.out.println(solution.getScore());
         solution.toFile();
     }
 

@@ -33,7 +33,7 @@ public class Solution {
         return new Solution(problem, libraries);
     }
 
-    public long calcScore() {
+    private long calcScore() {
         int day = 0;
         Set<Book> booksScanned = new HashSet<>();
         Set<Library> librariesSeen = new HashSet<>();
