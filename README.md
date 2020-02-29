@@ -6,4 +6,4 @@ While I did not register, I participated by myself unofficially.
 
 Score (self-calculated): 22,713,788
 
-If I would have officially participated, I would have ended 3250th of the 10724 teams that handed in an official solution.
+If I would have officially participated, I would have ended 3215th of the 10724 teams that handed in an official solution.
